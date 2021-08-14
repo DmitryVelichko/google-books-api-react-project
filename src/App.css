@@ -12,3 +12,24 @@ body {
   position: relative;
   background-attachment: fixed;
 }
+/* Затемнение к картинке */
+.filter::after {
+  background-color: hsla(0, 0%, 0%, 0.4);
+  content: '';
+  display: block;
+  height: 100%;
+  left:0;
+  top:0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.googleBooks {
+  z-index: 2;
+}
+
+.inputContainer {
+  width: 60%;
+  z-index: 2;
+}
