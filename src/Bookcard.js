@@ -43,6 +43,31 @@ const Bookcard = ({
             onClick={toggle}
           ></button>
         </div>
+        <span aria-hidden={true}>X</span>
+          </button>
+        </div>
+        <div className='modal-body'>
+          <div className='d-flex justify-content-between ml-3'>
+            <img src={thumbnail} alt={title} style={{ height: '233px' }} />
+            <div>
+              <p>Page Count: {pageCount}</p>
+              <p>Language : {language}</p>
+              <p>Authors : {authors}</p>
+              <p>Publisher : {publisher}</p>
+            </div>
+          </div>
+          <div className='mt-3'>{description}</div>
+        </div>
+        <div className='modal-footer'>
+          <div className='left-silde'>
+            <a
+              href={previewLink}
+              className='btn-link'
+              color='default'
+              type='button'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
     )
 }
 
