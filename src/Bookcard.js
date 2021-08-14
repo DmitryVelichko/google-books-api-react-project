@@ -68,6 +68,19 @@ const Bookcard = ({
               target='_blank'
               rel='noopener noreferrer'
             >
+                 Preview Link
+            </a>
+          </div>
+          <div className='divider'></div>
+          <div className='right-silde'>
+            <a
+              href={infoLink}
+              className='btn-link'
+              color='default'
+              type='button'
+              target='_blank'
+              rel='noopener noreferrer'
+            ></a>
     )
 }
 
