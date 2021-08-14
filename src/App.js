@@ -10,10 +10,9 @@ import {
 } from "reactstrap";
 
 function App() {
-
   const [maxResults, setMaxResults] = useState(10);
   const [startIndex, setStartIndex] = useState(1);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const mainHeader = () => {
     return (
@@ -24,7 +23,11 @@ function App() {
         </h1>
         <div className="inputContainer">
           <InputGroup className="mb-3" size="lg">
-            <Input placeholder="Найти книгу" />
+            <Input
+              placeholder="Найти книгу"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
             <InputGroupAddon addonType="append">
               <Button color="secondary">
                 <i className="fas fa-search"></i>
@@ -42,11 +45,22 @@ function App() {
           </FormGroup> */}
             <FormGroup className="ml-5">
               <Label for="maxResults">Макс Результат</Label>
-              <Input type="number" id="maxResults" placeholder="Макс результат" />
+              <Input
+                type="number"
+                id="maxResults"
+                placeholder="Макс результат"
+                value={maxResults}
+                onChange={(e) => setMaxResults(e.target.value)}
+              />
             </FormGroup>
             <FormGroup className="ml-5">
               <Label for="startIndex">Начальный индекс</Label>
-              <Input type="number" id="SortingBy" placeholder="Начальный индекс" />
+              <Input
+                type="number"
+                id="SortingBy"
+                placeholder="Начальный индекс"
+                value={startIndex} onChange={e => setStartIndex(e.target.value)}
+              />
             </FormGroup>
           </div>
         </div>
