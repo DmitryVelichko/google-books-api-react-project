@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { InputGroup, Input, InputGroupAddon, Button } from "reactstrap";
+import {
+  InputGroup,
+  Input,
+  InputGroupAddon,
+  Button,
+  FormGroup,
+  Label,
+} from "reactstrap";
 
 function App() {
+  
   const mainHeader = () => {
     return (
       <div className="main-image d-flex justify-content-center align-items-center flex-column">
@@ -19,6 +27,24 @@ function App() {
               </Button>
             </InputGroupAddon>
           </InputGroup>
+          <div className="d-flex text-white justify-content-center">
+            {/* <FormGroup className='ml-5'>
+            <Label for='categories'>Категории</Label>
+            <Input type='text' id='categories' placeholder='Категории'/>
+          </FormGroup>
+          <FormGroup className='ml-5'>
+            <Label for='SortingBy'>Сортировать по</Label>
+            <Input type='text' id='SortingBy' placeholder='Сортировать по'/>
+          </FormGroup> */}
+            <FormGroup className="ml-5">
+              <Label for="maxResults">Макс Результат</Label>
+              <Input type="number" id="maxResults" placeholder="Макс результат" />
+            </FormGroup>
+            <FormGroup className="ml-5">
+              <Label for="startIndex">Начальный индекс</Label>
+              <Input type="number" id="SortingBy" placeholder="Начальный индекс" />
+            </FormGroup>
+          </div>
         </div>
       </div>
     );
