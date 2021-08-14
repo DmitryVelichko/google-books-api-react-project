@@ -5,6 +5,65 @@ body {
 .main-image {
   background: url(https://images.unsplash.com/photo-1577985051167-0d49eec21977?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80);
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+  background-attachment: fixed;
+}
+
+.filter:after {
+  background-color: rgba(0, 0, 0, 0.4);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.btn-secondary {
+  height: 100%;
+}
+
+.card-title {
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* .twoButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.loadMore {
+  position: absolute;
+  display: inline-block;
+  text-decoration: none;
+  height: 60px;
+  width: 140px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 120px; 
+ 
+}
+
+/* body {
+  overflow-x: hidden;
+}
+
+.main-image {
+  background: url(https://images.unsplash.com/photo-1577985051167-0d49eec21977?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1025&q=80);
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   width: 100vw;
@@ -13,7 +72,7 @@ body {
   background-attachment: fixed;
 }
 /* Затемнение к картинке */
-.filter::after {
+/* .filter::after {
   background-color: hsla(0, 0%, 0%, 0.4);
   content: '';
   display: block;
@@ -37,4 +96,4 @@ body {
 .btn-secondary {
   
   height: 100%;
-}
+} */
