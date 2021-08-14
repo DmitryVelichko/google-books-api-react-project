@@ -1,21 +1,17 @@
-import React from 'react'
 import React, { useState } from 'react';
 import { Card, CardTitle, CardImg, CardBody, Button, Modal } from 'reactstrap';
-
-const Bookcard = ({
-    thumbnail,
-    title,
-    pageCount,
-    language,
-    description,
-    authors,
-    publisher,
-    previewLink,
-    infoLink
-  }) => {
-    return (
-        <div>
-            // States
+const BookCard = ({
+  thumbnail,
+  title,
+  pageCount,
+  language,
+  description,
+  authors,
+  publisher,
+  previewLink,
+  infoLink
+}) => {
+  // States
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -41,9 +37,8 @@ const Bookcard = ({
             className='close'
             type='button'
             onClick={toggle}
-          ></button>
-        </div>
-        <span aria-hidden={true}>X</span>
+          >
+            <span aria-hidden={true}>X</span>
           </button>
         </div>
         <div className='modal-body'>
@@ -68,7 +63,7 @@ const Bookcard = ({
               target='_blank'
               rel='noopener noreferrer'
             >
-                 Preview Link
+              Preview Link
             </a>
           </div>
           <div className='divider'></div>
@@ -80,8 +75,14 @@ const Bookcard = ({
               type='button'
               target='_blank'
               rel='noopener noreferrer'
-            ></a>
-    )
-}
+            >
+              Info Link
+            </a>
+          </div>
+        </div>
+      </Modal>
+    </Card>
+  );
+};
 
-export default Bookcard
+export default BookCard;
