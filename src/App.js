@@ -9,10 +9,17 @@ import {
   Label,
 } from "reactstrap";
 
+
 function App() {
   const [maxResults, setMaxResults] = useState(10);
   const [startIndex, setStartIndex] = useState(1);
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Функция, обрабатыващая поиск
+  const handleSubmit = () => {
+    setLoading(true);
+  }
 
   const mainHeader = () => {
     return (
@@ -29,7 +36,7 @@ function App() {
               onChange={(e) => setQuery(e.target.value)}
             />
             <InputGroupAddon addonType="append">
-              <Button color="secondary">
+              <Button color="secondary" onClick={handleSubmit}>
                 <i className="fas fa-search"></i>
               </Button>
             </InputGroupAddon>
