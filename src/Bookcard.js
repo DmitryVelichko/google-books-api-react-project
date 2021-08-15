@@ -9,7 +9,8 @@ const BookCard = ({
   authors,
   publisher,
   previewLink,
-  infoLink
+  infoLink,
+  mainCategory
 }) => {
   // States
   const [modal, setModal] = useState(false);
@@ -25,6 +26,10 @@ const BookCard = ({
       />
       <CardBody>
         <CardTitle className='card-title'>{title}</CardTitle>
+        <p>Название : {title}</p>
+        <p>Автор : {authors}</p>
+        <p>Категория : {mainCategory}</p>
+        
         <Button onClick={toggle}>More info</Button>
       </CardBody>
       <Modal isOpen={modal} toggle={toggle}>

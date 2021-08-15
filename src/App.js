@@ -8,6 +8,10 @@ import {
   FormGroup,
   Label,
   Spinner,
+  ButtonDropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -15,14 +19,16 @@ import axios from "axios";
 import BookCard from "./BookCard.js";
 
 function App() {
-  // States
+  // Состояние
   const [maxResults, setMaxResults] = useState(30);
   const [startIndex, setStartIndex] = useState(1);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
 
-  // Поиск по нажатию Enter
+  const keyAPI = 'AIzaSyB6i0WaLWuwHUCRKduV_xsauswJh3Tn6Kg';
+
+  // Функция поиска по нажатию Enter
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -37,11 +43,12 @@ function App() {
         });
     }
   };
-  // Handle Search
+
+  // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
   const handleSubmit = () => {
     setLoading(true);
 
-    if ((query === "") || (query.includes(" ", 0))) {
+    if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
 
@@ -61,30 +68,12 @@ function App() {
       });
   };
 
-  const handleSubmit2 = () => {
-    setLoading(true);
-
-    axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex + 30}`
-      )
-      .then((res) => {
-        if (res.data.items.length > 0) {
-          setCards(res.data.items);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        setLoading(true);
-        console.log(err.response);
-      });
-  };
-
-  // Main Show Case
+  // Основной UI
   const mainHeader = () => {
     return (
       <div className="main-image d-flex justify-content-center align-items-center flex-column">
-        {/* Overlay */}
+
+        {/* Заголовок*/}
         <div className="filter"></div>
         <h1
           className="display-2 text-center text-white mb-3"
@@ -92,6 +81,8 @@ function App() {
         >
           Гугол Книги
         </h1>
+
+        {/*Поисковая строка */}
         <div style={{ width: "60%", zIndex: 2 }}>
           <InputGroup size="lg" className="mb-3">
             <Input
@@ -100,6 +91,8 @@ function App() {
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={handleKeyPress}
             />
+
+            {/* Кнопка лупы */}
             <InputGroupAddon addonType="append">
               <Button color="secondary" onClick={handleSubmit}>
                 <i className="fas fa-search"></i>
@@ -107,7 +100,7 @@ function App() {
             </InputGroupAddon>
           </InputGroup>
 
-          {/* 2 КНОПКИ */}
+          {/* 2 КНОПКИ (Категории и сортировка) */}
           <div className="twoButtons d-flex text-white justify-content-center">
             <FormGroup className="ml-5">
               <Label for="categories">Категории</Label>
@@ -129,7 +122,28 @@ function App() {
                 onChange={(e) => setStartIndex(e.target.value)}
               />
             </FormGroup>
-            <Button className='loadMore' onClick={handleSubmit2}>Load More</Button>
+
+            {/* Кнопка "загрузить ещё" */}
+            <Button className="loadMore" onClick={handleSubmit}>
+              Загрузить ещё
+            </Button>
+          <div className="selectInput">
+          <select  class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+
+  <select class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+</select>
+          </div>
+            
+  
           </div>
         </div>
       </div>
@@ -147,6 +161,7 @@ function App() {
     } else {
       const items = cards.map((item, i) => {
         let thumbnail = "";
+        
         if (item.volumeInfo.imageLinks) {
           thumbnail = item.volumeInfo.imageLinks.thumbnail;
         }
@@ -163,6 +178,7 @@ function App() {
               description={item.volumeInfo.description}
               previewLink={item.volumeInfo.previewLink}
               infoLink={item.volumeInfo.infoLink}
+              mainCategory={item.volumeInfo.categories}
             />
           </div>
         );
