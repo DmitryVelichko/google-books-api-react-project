@@ -44,6 +44,11 @@ function App() {
 
   const loadMore = () => {
     setLoading(true);
+    
+    if (query === "" || query.includes(" ", 0)) {
+      toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
+    }
+    
     axios
       .get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
