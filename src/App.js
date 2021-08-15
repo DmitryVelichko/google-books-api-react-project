@@ -33,6 +33,9 @@ function App() {
         .then((res) => {
           setCards(res.data.items);
           setLoading(false);
+        }).catch((err) => {
+          setLoading(true);
+          console.log(err.response);
         });
     }
   };
@@ -44,7 +47,7 @@ function App() {
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
-
+    
     axios
       .get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
