@@ -28,6 +28,10 @@ function App() {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       setLoading(true);
+      
+    if (query === "" || query.includes(" ", 0)) {
+      toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
+    }
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
@@ -48,7 +52,7 @@ function App() {
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
-    
+
     axios
       .get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
