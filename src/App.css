@@ -38,11 +38,9 @@ body {
   text-overflow: ellipsis;
 }
 
-/* .twoButtons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
+ .twoButtons {
+   margin-top: 60px;
+} 
 
 .loadMore {
   position: absolute;
@@ -53,7 +51,7 @@ body {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: 120px; 
+  margin-top: 70px; 
  
 }
 

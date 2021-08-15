@@ -11,7 +11,7 @@ import {
   ButtonDropdown,
   DropdownItem,
   DropdownToggle,
-  DropdownMenu
+  DropdownMenu,
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -26,7 +26,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
 
-  const keyAPI = 'AIzaSyB6i0WaLWuwHUCRKduV_xsauswJh3Tn6Kg';
+  const keyAPI = "AIzaSyB6i0WaLWuwHUCRKduV_xsauswJh3Tn6Kg";
 
   // Функция поиска по нажатию Enter
 
@@ -72,7 +72,6 @@ function App() {
   const mainHeader = () => {
     return (
       <div className="main-image d-flex justify-content-center align-items-center flex-column">
-
         {/* Заголовок*/}
         <div className="filter"></div>
         <h1
@@ -102,48 +101,25 @@ function App() {
 
           {/* 2 КНОПКИ (Категории и сортировка) */}
           <div className="twoButtons d-flex text-white justify-content-center">
-            <FormGroup className="ml-5">
-              <Label for="categories">Категории</Label>
-              <Input
-                type="text"
-                id="categories"
-                placeholder="Категории"
-                value={maxResults}
-                onChange={(e) => setMaxResults(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="ml-5">
-              <Label for="SortingBy">Сортировать по</Label>
-              <Input
-                type="text"
-                id="SortingBy"
-                placeholder="Сортировать по"
-                value={startIndex}
-                onChange={(e) => setStartIndex(e.target.value)}
-              />
-            </FormGroup>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Все</option>
+              <option value="2">Art</option>
+              <option value="3">Biography</option>
+              <option value="4">Computers</option>
+              <option value="5">Hisotry</option>
+              <option value="6">Medical</option>
+              <option value="7">Poetry</option>
+            </select>
+
+            <select class="form-select" aria-label="Default select example">
+              <option selected>По релевантности</option>
+              <option value="2">Newest</option>
+            </select>
 
             {/* Кнопка "загрузить ещё" */}
             <Button className="loadMore" onClick={handleSubmit}>
               Загрузить ещё
             </Button>
-          <div className="selectInput">
-          <select  class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-
-  <select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
-</select>
-          </div>
-            
-  
           </div>
         </div>
       </div>
@@ -161,7 +137,7 @@ function App() {
     } else {
       const items = cards.map((item, i) => {
         let thumbnail = "";
-        
+
         if (item.volumeInfo.imageLinks) {
           thumbnail = item.volumeInfo.imageLinks.thumbnail;
         }
