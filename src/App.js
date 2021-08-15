@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import {
   InputGroup,
@@ -21,6 +21,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
 
+  
+
   // Функция поиска по нажатию Enter
 
   const handleKeyPress = (e) => {
@@ -41,6 +43,7 @@ function App() {
   };
 
   const loadMore = () => {
+    setLoading(true);
     axios
       .get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
