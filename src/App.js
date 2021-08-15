@@ -15,7 +15,7 @@ import keyAPI from "./KeyAPI";
 
 function App() {
   // Состояние
-  const [maxResults, setMaxResults] = useState(30);
+  const [maxResults, setMaxResults] = useState(2);
   const [startIndex, setStartIndex] = useState(1);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -64,7 +64,6 @@ function App() {
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
-
     
     axios
       .get(
@@ -115,8 +114,8 @@ function App() {
 
           {/* 2 КНОПКИ (Категории и сортировка) */}
           <div className="twoButtons d-flex text-white justify-content-center">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Все</option>
+            <select className="form-select" aria-label="Default select example">
+              <option defaultValue>Все</option>
               <option value="2">Art</option>
               <option value="3">Biography</option>
               <option value="4">Computers</option>
@@ -125,8 +124,8 @@ function App() {
               <option value="7">Poetry</option>
             </select>
 
-            <select class="form-select" aria-label="Default select example">
-              <option selected>По релевантности</option>
+            <select className="form-select" aria-label="Default select example">
+              <option defaultValue>По релевантности</option>
               <option value="2">Newest</option>
             </select>
 
