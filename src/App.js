@@ -40,12 +40,20 @@ function App() {
     }
   };
 
+  const loadMore = () => {
+    
+  }
+
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
   const handleSubmit = () => {
     setLoading(true);
 
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
+    }
+
+    if () {
+
     }
     
     axios
@@ -113,7 +121,7 @@ function App() {
             </select>
 
             {/* Кнопка "загрузить ещё" */}
-            <Button className="loadMore" onClick={handleSubmit}>
+            <Button className="loadMore" onClick={loadMore}>
               Загрузить ещё
             </Button>
           </div>
