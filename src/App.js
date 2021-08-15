@@ -41,7 +41,20 @@ function App() {
   };
 
   const loadMore = () => {
-    
+    axios
+      .get(
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+      )
+      .then((res) => {
+        if (res.data.items.length > 0) {
+          setCards(res.data.items);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        setLoading(true);
+        console.log(err.response);
+      });
   }
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
@@ -52,9 +65,6 @@ function App() {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
 
-    if () {
-
-    }
     
     axios
       .get(
