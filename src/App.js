@@ -5,18 +5,13 @@ import {
   Input,
   InputGroupAddon,
   Button,
-  FormGroup,
-  Label,
-  Spinner,
-  ButtonDropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
+  Spinner
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import axios from "axios";
 import BookCard from "./BookCard.js";
+import keyAPI from "./KeyAPI";
 
 function App() {
   // Состояние
@@ -26,8 +21,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
 
-  const keyAPI = "AIzaSyB6i0WaLWuwHUCRKduV_xsauswJh3Tn6Kg";
-
   // Функция поиска по нажатию Enter
 
   const handleKeyPress = (e) => {
@@ -35,7 +28,7 @@ function App() {
       setLoading(true);
       axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}`
+          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
         )
         .then((res) => {
           setCards(res.data.items);
@@ -54,7 +47,7 @@ function App() {
 
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}`
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
       )
       .then((res) => {
         if (res.data.items.length > 0) {
