@@ -20,6 +20,9 @@ function App() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
+  const [select1, setSelect1] = useState("");
+  const [select2, setSelect2] = useState("");
+  
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
   const handleSubmit = (e) => {
@@ -81,7 +84,10 @@ function App() {
 
           {/* 2 КНОПКИ (Категории и сортировка) */}
           <div className="twoButtons d-flex text-white justify-content-center">
-            <select className="form-select container p-1" aria-label="Default select example">
+            <select className="form-select container p-1" onChange={(e) => {
+              const selectedOpt = e.target.value;
+              setSelect1(selectedOpt);
+            }} >
               <option defaultValue value='all'>Все</option>
               <option value="art">Art</option>
               <option value="biography">Biography</option>
@@ -91,7 +97,7 @@ function App() {
               <option value="poetry">Poetry</option>
             </select>
 
-            <select className="form-select container p-1" aria-label="Default select example">
+            <select className="form-select container p-1" >
               <option defaultValue value='relevance'>По релевантности</option>
               <option value="newest">Newest</option>
             </select>
