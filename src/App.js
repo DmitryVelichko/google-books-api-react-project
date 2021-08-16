@@ -20,9 +20,18 @@ function App() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  const [select1, setSelect1] = useState("");
-  const [select2, setSelect2] = useState("");
-  
+  // const [select1, setSelect1] = useState("");
+  //  const [select2, setSelect2] = useState("");
+
+  const handleSelect1 = (e) => {
+    const selectedOpt1 = e.target.value;
+    console.log(selectedOpt1);
+  };
+
+  const handleSelect2 = (e) => {
+    const selectedOpt2 = e.target.value;
+    console.log(selectedOpt2);
+  };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
   const handleSubmit = (e) => {
@@ -42,7 +51,6 @@ function App() {
           setLoading(false);
           setMaxResults(maxResults);
           setStartIndex(startIndex + 29);
-          
         }
       })
       .catch((err) => {
@@ -71,7 +79,7 @@ function App() {
               placeholder="Book Search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+              onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
             />
 
             {/* Кнопка лупы */}
@@ -84,11 +92,12 @@ function App() {
 
           {/* 2 КНОПКИ (Категории и сортировка) */}
           <div className="twoButtons d-flex text-white justify-content-center">
-            <select className="form-select container p-1" onChange={(e) => {
-              const selectedOpt = e.target.value;
-              setSelect1(selectedOpt);
-            }} >
-              <option defaultValue value='all'>Все</option>
+            <select
+              className="form-select container p-1"
+             
+              onChange={handleSelect1}
+            >
+              <option value="all">Все</option>
               <option value="art">Art</option>
               <option value="biography">Biography</option>
               <option value="computers">Computers</option>
@@ -97,8 +106,11 @@ function App() {
               <option value="poetry">Poetry</option>
             </select>
 
-            <select className="form-select container p-1" >
-              <option defaultValue value='relevance'>По релевантности</option>
+            <select
+              className="form-select container p-1"
+              onChange={handleSelect2}
+            >
+              <option value="relevance">По релевантности</option>
               <option value="newest">Newest</option>
             </select>
 
