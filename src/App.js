@@ -5,7 +5,7 @@ import {
   Input,
   InputGroupAddon,
   Button,
-  Spinner
+  Spinner,
 } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -15,23 +15,21 @@ import keyAPI from "./KeyAPI";
 
 function App() {
   // Состояние
-  const [maxResults, setMaxResults] = useState(2);
+  const [maxResults, setMaxResults] = useState(4);
   const [startIndex, setStartIndex] = useState(1);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-
-  
 
   // Функция поиска по нажатию Enter
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       setLoading(true);
-      
-    if (query === "" || query.includes(" ", 0)) {
-      toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
-    }
+
+      if (query === "" || query.includes(" ", 0)) {
+        toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
+      }
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
@@ -39,7 +37,9 @@ function App() {
         .then((res) => {
           setCards(res.data.items);
           setLoading(false);
-        }).catch((err) => {
+          setMaxResults(maxResults + maxResults);
+        })
+        .catch((err) => {
           setLoading(true);
           console.log(err.response);
         });
@@ -48,7 +48,7 @@ function App() {
 
   const loadMore = () => {
     setLoading(true);
-    
+
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
@@ -61,13 +61,14 @@ function App() {
         if (res.data.items.length > 0) {
           setCards(res.data.items);
           setLoading(false);
+          setMaxResults(maxResults + maxResults);
         }
       })
       .catch((err) => {
         setLoading(true);
         console.log(err.response);
       });
-  }
+  };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
   const handleSubmit = () => {
@@ -76,7 +77,7 @@ function App() {
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
-    
+
     axios
       .get(
         `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
@@ -85,6 +86,7 @@ function App() {
         if (res.data.items.length > 0) {
           setCards(res.data.items);
           setLoading(false);
+          setMaxResults(maxResults + maxResults);
         }
       })
       .catch((err) => {
