@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import {
   InputGroup,
@@ -20,8 +20,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  // const [select1, setSelect1] = useState("");
-  //  const [select2, setSelect2] = useState("");
+ // const [select1, setSelect1] = useState("");
+    const [select2, setSelect2] = useState("");
 
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
@@ -30,8 +30,23 @@ function App() {
 
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
-    console.log(selectedOpt2);
-  };
+    
+    
+    switch(selectedOpt2) {
+      case 'relevance':
+        console.log(selectedOpt2);
+        
+      break;
+
+      case 'newest':
+        console.log(selectedOpt2);
+
+
+      break;
+
+    }
+  }
+   
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
   const handleSubmit = (e) => {
@@ -48,8 +63,7 @@ function App() {
       .then((res) => {
         if (res.data.items.length > 0) {
           setCards(res.data.items);
-          setLoading(false);
-          setMaxResults(maxResults);
+          setLoading(false);     
           setStartIndex(startIndex + 29);
         }
       })
@@ -108,11 +122,17 @@ function App() {
 
             <select
               className="form-select container p-1"
-              onChange={handleSelect2}
+              onChange={(e) => {
+                const s2 = e.target.value;
+                setSelect2(s2)
+                console.log(select2)
+              }}
             >
               <option value="relevance">По релевантности</option>
               <option value="newest">Newest</option>
             </select>
+
+            
 
             {/* Кнопка "загрузить ещё" */}
             <Button className="loadMore" onClick={handleSubmit}>
