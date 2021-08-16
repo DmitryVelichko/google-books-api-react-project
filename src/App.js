@@ -37,7 +37,7 @@ function App() {
         .then((res) => {
           setCards(res.data.items);
           setLoading(false);
-         setMaxResults(maxResults);
+          setMaxResults(maxResults);
           setStartIndex(startIndex + 40);
         })
         .catch((err) => {
@@ -88,7 +88,8 @@ function App() {
         if (res.data.items.length > 0) {
           setCards(res.data.items);
           setLoading(false);
-          setMaxResults(maxResults + maxResults);
+          setMaxResults(maxResults);
+          setStartIndex(startIndex + 40);
         }
       })
       .catch((err) => {
