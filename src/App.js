@@ -81,19 +81,19 @@ function App() {
 
           {/* 2 КНОПКИ (Категории и сортировка) */}
           <div className="twoButtons d-flex text-white justify-content-center">
-            <select className="form-select" aria-label="Default select example">
-              <option defaultValue>Все</option>
-              <option value="2">Art</option>
-              <option value="3">Biography</option>
-              <option value="4">Computers</option>
-              <option value="5">Hisotry</option>
-              <option value="6">Medical</option>
-              <option value="7">Poetry</option>
+            <select className="form-select container p-1" aria-label="Default select example">
+              <option defaultValue value='all'>Все</option>
+              <option value="art">Art</option>
+              <option value="biography">Biography</option>
+              <option value="computers">Computers</option>
+              <option value="history">Hisotry</option>
+              <option value="medical">Medical</option>
+              <option value="poetry">Poetry</option>
             </select>
 
-            <select className="form-select" aria-label="Default select example">
-              <option defaultValue>По релевантности</option>
-              <option value="2">Newest</option>
+            <select className="form-select container p-1" aria-label="Default select example">
+              <option defaultValue value='relevance'>По релевантности</option>
+              <option value="newest">Newest</option>
             </select>
 
             {/* Кнопка "загрузить ещё" */}
