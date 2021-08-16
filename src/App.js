@@ -15,7 +15,7 @@ import keyAPI from "./KeyAPI";
 
 function App() {
   // Состояние
-  const [maxResults, setMaxResults] = useState(4);
+  const [maxResults, setMaxResults] = useState(30);
   const [startIndex, setStartIndex] = useState(1);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,8 @@ function App() {
         .then((res) => {
           setCards(res.data.items);
           setLoading(false);
-          setMaxResults(maxResults + maxResults);
+         setMaxResults(maxResults);
+          setStartIndex(startIndex + 40);
         })
         .catch((err) => {
           setLoading(true);
@@ -61,7 +62,8 @@ function App() {
         if (res.data.items.length > 0) {
           setCards(res.data.items);
           setLoading(false);
-          setMaxResults(maxResults + maxResults);
+          setMaxResults(maxResults);
+          setStartIndex(startIndex + 40);
         }
       })
       .catch((err) => {
