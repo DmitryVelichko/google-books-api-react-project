@@ -21,60 +21,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
 
-  // Функция поиска по нажатию Enter
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      setLoading(true);
-
-      if (query === "" || query.includes(" ", 0)) {
-        toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
-      }
-      axios
-        .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
-        )
-        .then((res) => {
-          setCards(res.data.items);
-          setLoading(false);
-          setMaxResults(maxResults);
-        
-        })
-        .catch((err) => {
-          setLoading(true);
-          console.log(err.response);
-          setStartIndex(startIndex + 29);
-        });
-    }
-  };
-
-  const loadMore = () => {
-    setLoading(true);
-
-    if (query === "" || query.includes(" ", 0)) {
-      toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
-    }
-
-    axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
-      )
-      .then((res) => {
-        if (res.data.items.length > 0) {
-          setCards(res.data.items);
-          setLoading(false);
-          setMaxResults(maxResults);
-          setStartIndex(startIndex + 29);
-        }
-      })
-      .catch((err) => {
-        setLoading(true);
-        console.log(err.response);
-      });
-  };
-
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     setLoading(true);
 
     if (query === "" || query.includes(" ", 0)) {
@@ -120,7 +68,7 @@ function App() {
               placeholder="Book Search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyUp={handleKeyPress}
+              onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
             />
 
             {/* Кнопка лупы */}
@@ -149,7 +97,7 @@ function App() {
             </select>
 
             {/* Кнопка "загрузить ещё" */}
-            <Button className="loadMore" onClick={loadMore}>
+            <Button className="loadMore" onClick={handleSubmit}>
               Загрузить ещё
             </Button>
           </div>
