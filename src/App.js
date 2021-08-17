@@ -98,6 +98,22 @@ function App() {
         break;
 
       case "computers":
+        axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Computers"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+        break;
 
       case "history":
 
