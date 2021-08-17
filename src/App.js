@@ -20,42 +20,126 @@ function App() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  // const [select1, setSelect1] = useState("");
+  const [select, setSelect] = useState("");
   //  const [select2, setSelect2] = useState("");
 
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
-    handleSubmit(selectedOpt1);
+    setSelect(selectedOpt1);
   };
 
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
-    
+    setSelect(selectedOpt2);
   };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
-  const handleSubmit = (selectedOpt1) => {
+  const handleSubmit = () => {
     setLoading(true);
-console.log(selectedOpt1)
+
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
 
-    axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
-      )
-      .then((res) => {
-        if (res.data.items.length > 0) {
-          setCards(res.data.items);
-          setLoading(false);
-          setStartIndex(startIndex + 29);
-        }
-      })
-      .catch((err) => {
-        setLoading(true);
-        console.log(err.response);
-      });
+    switch (select) {
+      case "newest":
+        axios
+          .get(
+            `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+          )
+          .then((res) => {
+            if (res.data.items.length > 0) {
+              setCards(res.data.items);
+              setLoading(false);
+              setStartIndex(startIndex + 29);
+            }
+          })
+          .catch((err) => {
+            setLoading(true);
+            console.log(err.response);
+          });
+          break;
+      
+
+      case "art":
+        axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Art"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+        break;
+
+      case "biography":
+        axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Biography"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+        break;
+
+      case "computers":
+
+      case "history":
+
+      case "medical":
+        axios
+          .get(
+            `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Medicine"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          )
+          .then((res) => {
+            if (res.data.items.length > 0) {
+              setCards(res.data.items);
+              setLoading(false);
+              setStartIndex(startIndex + 29);
+            }
+          })
+          .catch((err) => {
+            setLoading(true);
+            console.log(err.response);
+          });
+          break;
+
+      case "poetry":
+
+      case "all":
+      default:
+        axios
+          .get(
+            `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          )
+          .then((res) => {
+            if (res.data.items.length > 0) {
+              setCards(res.data.items);
+              setLoading(false);
+              setStartIndex(startIndex + 29);
+            }
+          })
+          .catch((err) => {
+            setLoading(true);
+            console.log(err.response);
+          });
+          break;
+    }
   };
 
   // Основной UI
