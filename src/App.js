@@ -41,7 +41,115 @@ function App() {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
 
-    if (select === "newest") {
+    if (select === "art" && select2 === 'newest') {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Art"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "biography" && select2 === 'newest') {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Biography"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "computers" && select2 === 'newest') {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Computers"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "history" && select2 === 'newest') {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:History"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "medical" && select2 === 'newest') {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Medicine"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "poetry" && select2 === 'newest') {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Poetry"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
@@ -183,6 +291,8 @@ function App() {
           console.log(err.response);
         });
     }
+
+    
   };
 
   // Основной UI
