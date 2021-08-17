@@ -21,7 +21,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [select, setSelect] = useState("");
-  //  const [select2, setSelect2] = useState("");
+  const [select2, setSelect2] = useState("");
 
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
@@ -30,7 +30,7 @@ function App() {
 
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
-    setSelect(selectedOpt2);
+    setSelect2(selectedOpt2);
   };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
@@ -41,30 +41,10 @@ function App() {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
 
-    switch (select) {
-      case "newest":
-        axios
-          .get(
-            `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
-          )
-          .then((res) => {
-            if (res.data.items.length > 0) {
-              setCards(res.data.items);
-              setLoading(false);
-              setStartIndex(startIndex + 29);
-            }
-          })
-          .catch((err) => {
-            setLoading(true);
-            console.log(err.response);
-          });
-          break;
-      
-
-      case "art":
-        axios
+    if (select === "newest") {
+      axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Art"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&orderBy=newest&key=${keyAPI}`
         )
         .then((res) => {
           if (res.data.items.length > 0) {
@@ -77,12 +57,12 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-        break;
-
-      case "biography":
-        axios
+    } else if (select === "art") {
+      axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Biography"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Art"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
         )
         .then((res) => {
           if (res.data.items.length > 0) {
@@ -95,12 +75,12 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-        break;
-
-      case "computers":
-        axios
+    } else if (select === "biography") {
+      axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Computers"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Biography"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
         )
         .then((res) => {
           if (res.data.items.length > 0) {
@@ -113,12 +93,12 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-        break;
-
-      case "history":
-        axios
+    } else if (select === "computers") {
+      axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:History"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Computers"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
         )
         .then((res) => {
           if (res.data.items.length > 0) {
@@ -131,30 +111,12 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-        break;
-
-      case "medical":
-        axios
-          .get(
-            `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Medicine"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
-          )
-          .then((res) => {
-            if (res.data.items.length > 0) {
-              setCards(res.data.items);
-              setLoading(false);
-              setStartIndex(startIndex + 29);
-            }
-          })
-          .catch((err) => {
-            setLoading(true);
-            console.log(err.response);
-          });
-          break;
-
-      case "poetry":
-        axios
+    } else if (select === "history") {
+      axios
         .get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Poetry"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:History"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
         )
         .then((res) => {
           if (res.data.items.length > 0) {
@@ -167,26 +129,59 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-        break;
-
-      case "all":
-      default:
-        axios
-          .get(
-            `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
-          )
-          .then((res) => {
-            if (res.data.items.length > 0) {
-              setCards(res.data.items);
-              setLoading(false);
-              setStartIndex(startIndex + 29);
-            }
-          })
-          .catch((err) => {
-            setLoading(true);
-            console.log(err.response);
-          });
-          break;
+    } else if (select === "medical") {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Medicine"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else if (select === "poetry") {
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${
+            query + "+subject:Poetry"
+          }&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+    } else {
+      //default
+      axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
     }
   };
 
