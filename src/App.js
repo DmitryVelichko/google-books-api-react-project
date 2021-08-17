@@ -25,27 +25,14 @@ function App() {
 
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
-    console.log(selectedOpt1);
   };
 
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
-
-    switch (selectedOpt2) {
-      case "relevance":
-        console.log(selectedOpt2);
-
-        break;
-
-      case "newest":
-        console.log(selectedOpt2);
-
-        break;
-    }
   };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, selectedOpt1, selectedOpt2) => {
     setLoading(true);
 
     if (query === "" || query.includes(" ", 0)) {
