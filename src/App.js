@@ -30,13 +30,13 @@ function App() {
 
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
-    handleSubmit(selectedOpt2);
+    
   };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
-  const handleSubmit = (e, selectedOpt1, selectedOpt2) => {
+  const handleSubmit = (selectedOpt1) => {
     setLoading(true);
-
+console.log(selectedOpt1)
     if (query === "" || query.includes(" ", 0)) {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
