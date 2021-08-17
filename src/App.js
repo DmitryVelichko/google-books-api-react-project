@@ -1,3 +1,5 @@
+// Простите за спагетти-код! На рефакторинг не хватило времени, но тут всё не так сложно, как кажется на первый взгляд. Я надеюсь)
+
 import React, { useState } from "react";
 import "./App.css";
 import {
@@ -14,6 +16,7 @@ import BookCard from "./BookCard.js";
 import keyAPI from "./KeyAPI";
 
 function App() {
+
   // Состояние и константы
   const maxResults = 30;
   const [startIndex, setStartIndex] = useState(0);
@@ -23,19 +26,19 @@ function App() {
   const [select, setSelect] = useState("");
   const [select2, setSelect2] = useState("");
 
-  // Функция для первого селекта
+  // Функция для первого dropdown-селекта
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
     setSelect(selectedOpt1);
   };
 
-  // Функция для второго селекта
+  // Функция для второго dropdown-селекта
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
     setSelect2(selectedOpt2);
   };
 
-  // Основная функция по реализации поиска книг
+  // Основная функция реализации поиска книг
   const handleSubmit = () => {
     setLoading(true);
 
@@ -299,6 +302,7 @@ function App() {
   const mainHeader = () => {
     return (
       <div className="main-image d-flex justify-content-center align-items-center flex-column">
+
         {/* Заголовок*/}
         <div className="filter"></div>
         <h1
@@ -378,7 +382,7 @@ function App() {
 
         return (
           <div className="col-lg-4 mb-3" key={item.id}>
-
+            
             {/* Карточка с дополнительной информацией */}
             <BookCard
               thumbnail={thumbnail}
