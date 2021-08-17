@@ -14,8 +14,8 @@ import BookCard from "./BookCard.js";
 import keyAPI from "./KeyAPI";
 
 function App() {
-  // Состояние
-  const [maxResults, setMaxResults] = useState(30);
+  // Состояние и константы
+  const maxResults = 30;
   const [startIndex, setStartIndex] = useState(0);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,25 +23,27 @@ function App() {
   const [select, setSelect] = useState("");
   const [select2, setSelect2] = useState("");
 
+  // Функция для первого селекта
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
     setSelect(selectedOpt1);
   };
 
+  // Функция для второго селекта
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
     setSelect2(selectedOpt2);
   };
 
-  // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
+  // Основная функция по реализации поиска книг
   const handleSubmit = () => {
     setLoading(true);
 
-    if (query === "" || query.includes(" ", 0)) {
+    if (query === "") {
       toast.error("ПОЛЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ, ВВЕДИТЕ ТЕКСТ");
     }
 
-    if (select === "art" && select2 === 'newest') {
+    if (select === "art" && select2 === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${
@@ -59,7 +61,7 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-    } else if (select === "biography" && select2 === 'newest') {
+    } else if (select === "biography" && select2 === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${
@@ -77,7 +79,7 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-    } else if (select === "computers" && select2 === 'newest') {
+    } else if (select === "computers" && select2 === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${
@@ -95,7 +97,7 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-    } else if (select === "history" && select2 === 'newest') {
+    } else if (select === "history" && select2 === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${
@@ -113,7 +115,7 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-    } else if (select === "medical" && select2 === 'newest') {
+    } else if (select === "medical" && select2 === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${
@@ -131,7 +133,7 @@ function App() {
           setLoading(true);
           console.log(err.response);
         });
-    } else if (select === "poetry" && select2 === 'newest') {
+    } else if (select === "poetry" && select2 === "newest") {
       axios
         .get(
           `https://www.googleapis.com/books/v1/volumes?q=${
@@ -291,8 +293,6 @@ function App() {
           console.log(err.response);
         });
     }
-
-    
   };
 
   // Основной UI
@@ -305,7 +305,7 @@ function App() {
           className="display-2 text-center text-white mb-3"
           style={{ zIndex: 2 }}
         >
-          Гугол Книги
+          Гугол книги
         </h1>
 
         {/*Поисковая строка */}
@@ -326,27 +326,28 @@ function App() {
             </InputGroupAddon>
           </InputGroup>
 
-          {/* 2 КНОПКИ (Категории и сортировка) */}
+          {/* Селект 1 (Категории) */}
           <div className="twoButtons d-flex text-white justify-content-center">
             <select
               className="form-select container p-1"
               onChange={handleSelect1}
             >
               <option value="all">Все</option>
-              <option value="art">Art</option>
-              <option value="biography">Biography</option>
-              <option value="computers">Computers</option>
-              <option value="history">Hisotry</option>
-              <option value="medical">Medical</option>
-              <option value="poetry">Poetry</option>
+              <option value="art">Искусство</option>
+              <option value="biography">Биографии</option>
+              <option value="computers">Компьютеры</option>
+              <option value="history">История</option>
+              <option value="medical">Медицина</option>
+              <option value="poetry">Поэзия</option>
             </select>
 
+            {/* Селект 2 (Сортировка) */}
             <select
               className="form-select container p-1"
               onChange={handleSelect2}
             >
               <option value="relevance">По релевантности</option>
-              <option value="newest">Newest</option>
+              <option value="newest">Новинки</option>
             </select>
 
             {/* Кнопка "загрузить ещё" */}
@@ -377,6 +378,8 @@ function App() {
 
         return (
           <div className="col-lg-4 mb-3" key={item.id}>
+
+            {/* Карточка с дополнительной информацией */}
             <BookCard
               thumbnail={thumbnail}
               title={item.volumeInfo.title}
