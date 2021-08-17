@@ -25,10 +25,12 @@ function App() {
 
   const handleSelect1 = (e) => {
     const selectedOpt1 = e.target.value;
+    handleSubmit(selectedOpt1);
   };
 
   const handleSelect2 = (e) => {
     const selectedOpt2 = e.target.value;
+    handleSubmit(selectedOpt2);
   };
 
   // Основная функция по реализации поиска книг с обработкой пустой строки и строки с пробелами
