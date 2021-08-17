@@ -152,6 +152,22 @@ function App() {
           break;
 
       case "poetry":
+        axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=${query+"+subject:Poetry"}&maxResults=${maxResults}&startIndex=${startIndex}&key=${keyAPI}`
+        )
+        .then((res) => {
+          if (res.data.items.length > 0) {
+            setCards(res.data.items);
+            setLoading(false);
+            setStartIndex(startIndex + 29);
+          }
+        })
+        .catch((err) => {
+          setLoading(true);
+          console.log(err.response);
+        });
+        break;
 
       case "all":
       default:
