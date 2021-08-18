@@ -1,4 +1,4 @@
-Приложение Google Books. Использованные технологии: ReactJS, Google Books API, Axios, ReactStrap, and React-toastify (для создание поп-апа).
+Приложение Google Books. Использованные технологии: ReactJS, Google Books API, Axios, ReactStrap и React-toastify (для создание поп-апа).
 
 Описание проекта под картинкой.
 
